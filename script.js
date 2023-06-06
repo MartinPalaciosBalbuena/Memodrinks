@@ -8,6 +8,7 @@ let iconos = []
         let fondo = document.querySelector("body");
         let cont = 0;
         let vercont = document.getElementById("movimientos");
+        let cantidadTarjetas = 0;
 
         function cargarIconos() {
             iconos = [
@@ -24,7 +25,7 @@ let iconos = []
             ]
         }
 
-        function generarTablero() {
+        function generarTablero(e) {
             cargarIconos()
             selecciones = []
             let tablero = document.getElementById("tablero")
@@ -36,8 +37,24 @@ let iconos = []
             fondo.style.transition = "6s"
             cont = 0
             vercont.innerHTML=`Movimientos: ${cont}`
-           
-            for (let i = 0; i < 20; i++) {
+            cantidadTarjetas = e
+            tiempodejuego.innerHTML = `Tiempo: ${timer} `;
+            end ();
+            
+            let juego = document.querySelector(".new-game")
+            if (e === 8){
+                juego.setAttribute("onclick", "generarTablero(8)")
+            }
+
+            else if (e === 12){
+                juego.setAttribute("onclick", "generarTablero(12)")
+            }
+
+            else if (e === 20){
+                juego.setAttribute("onclick", "generarTablero(20)")
+            }
+
+            for (let i = 0; i < e; i++) {
                 tarjetas.push(`
                 <div class="area-tarjeta" onclick="seleccionarTarjeta(${i})">
                     <div class="tarjeta" id="tarjeta${i}">
@@ -71,7 +88,7 @@ let iconos = []
                 vercont.innerHTML=`Movimientos: ${cont}`
             }
             if (temporizador == false) {
-                ContadorTime(selecciones);
+                ContadorTime();
                 temporizador = true;
             }
         }
@@ -85,19 +102,60 @@ let iconos = []
                     let tarjeta2 = document.getElementById("tarjeta" + selecciones[1])
                     tarjeta1.style.transform = "rotateY(0deg)"
                     tarjeta2.style.transform = "rotateY(0deg)"
-                }else{
+                }
+                else
+                {
                     trasera1.style.background = "plum"
                     trasera2.style.background = "plum"
                     correcto++
                 }
+
+                if (correcto == cantidadTarjetas/2){
+
+                    if (timer < 15){
+
+                        Swal.fire({
+                            imageUrl:"img/3038194.gif", 
+                            imageWidth: 400,
+                            imageHeight: 300,
+                            title:"Perfecto",
+                            text:`Brindemos! Moves: ${cont} Time: ${timer} `,
+                         })
+                    }
+
+                    else if (timer < 30){
+
+                        Swal.fire({
+                            imageUrl:"img/MEME DICAPRIO.jpg", 
+                            imageWidth: 250,
+                            imageHeight: 250,
+                            title:"Enhorabuena",
+                            text:`Eres Veloz! Moves: ${cont} Time: ${timer}`,
+                        })
+                    }
+                    
+                    else {
+                     Swal.fire({
+                        imageUrl:"img/game-of-thrones-wine.gif", 
+                        imageWidth: 250,
+                        imageHeight: 250,
+                        title:"No esta mal",
+                        text:`Mal es no tan, Moves: ${cont} Time: ${timer}`,
+                        })
+                    }
+                }
+                
             }, 1000);
         }
         function ContadorTime() {
             tiempoSucesivoId = setInterval(() => {
               timer++;
-              tiempodejuego.innerHTML = `Tiempo: ${timer} ss`;
+              tiempodejuego.innerHTML = `Tiempo: ${timer} `;
               if (correcto == cantidadTarjetas / 2) {
                 clearInterval(tiempoSucesivoId);
-              }
+              } 
             }, 1000);
+        }
+        function end(){
+            clearInterval(tiempoSucesivoId);
         }

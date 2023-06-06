@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.2.1/dist/sweetalert2.all.min.js"></script>
+    
     <title>Juego de Memoria</title>
 </head>
 <body>
@@ -15,12 +16,17 @@
     </div>
     <br>
     <div class="container">
-        <div class="nuevo-juego" onclick="generarTablero()">
+        <div class="nuevo-juego new-game" onclick="generarTablero(8)">
         Nuevo Juego
          </div>
-        <span class="temporizador" id="tiempo">Tiempo: 0 ss </span>
+        <span class="temporizador" id="tiempo">Tiempo: 0 </span>
         <span class="nuevo-juego" id="movimientos">Movimientos:</span>
     </div>
+    <ul class="lista">
+        <Li onclick="generarTablero(8)"  class="nuevo-juego">Facil</Li>
+        <Li onclick="generarTablero(12)" class="nuevo-juego">Medio</Li>
+        <Li onclick="generarTablero(20)"  class="nuevo-juego">Dificil</Li>
+    </ul>
 
 <script src="script.js"></script>   
 </body>

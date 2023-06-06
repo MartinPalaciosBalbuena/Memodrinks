@@ -16,7 +16,7 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: end;
+    justify-content: center;
     align-items: center;
     text-align: center;
     font-family: arial;
@@ -92,17 +92,26 @@ div {
     width: 120px;
 }
 .temporizador{
-    cursor: pointer;
     background: linear-gradient(white, grey);
     padding: 20px;
     border-radius: 50px;
     border: white 5px solid;
     font-size: 130%;
 }
+.lista{
+    display: flex;
+    gap: 30px;
+    list-style: none;
+    padding: 0;
+}
 @media(max-width:550px){
     .container{
     display: flex;
     flex-direction: column;
     gap: 10px;
+    }
+
+.lista{
+    flex-direction: column;
     }
 }
